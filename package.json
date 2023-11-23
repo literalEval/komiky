@@ -1,5 +1,6 @@
 {
   "name": "komiky",
+  "homepage": "https://literaleval.github.io/komiky/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
