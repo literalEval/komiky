@@ -1,0 +1,12 @@
+.home {
+  display: grid;
+  flex-direction: row;
+  justify-items: center;
+  align-items: center;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto;
+  gap: 4rem;
+
+  height: 100vh;
+  width: 100vw;
+}

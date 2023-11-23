@@ -1,0 +1,10 @@
+.comic-input {
+  margin: 1rem 4px;
+  width: 100%;
+  height: 2.4rem;
+}
+
+.comic-input textarea {
+  width: 100%;
+  height: 100%;
+}
