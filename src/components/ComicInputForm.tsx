@@ -36,6 +36,7 @@ const ComicInputForm = (props: any): JSX.Element => {
       <button onClick={() => props.onGenerateComics(inputFields)}>
         Generate
       </button>
+      <button onClick={props.onDownloadComic}>Download</button>
     </div>
   );
 };

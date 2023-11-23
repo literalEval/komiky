@@ -3,10 +3,18 @@
   flex-direction: row;
   justify-items: center;
   align-items: center;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1.4fr 0.6fr;
   grid-template-rows: auto;
   gap: 4rem;
 
-  height: 100vh;
+  min-height: 100vh;
   width: 100vw;
+}
+
+@media only screen and (max-width: 600px) {
+  .home {
+    grid-template-rows: 1.4fr 0.6fr;
+    grid-template-columns: auto;
+    /* grid-auto-flow: dense; */
+  }
 }
