@@ -11,3 +11,7 @@ A generative art backed comics creator.
 
 ## Limitations
 - Adding text to the bubbles is not yet supported.
+
+## Attributions
+- Background by <a href="https://unsplash.com/@waldemarbrandt67w?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Waldemar</a> on <a href="https://unsplash.com/photos/the-joker-comic-book-on-brown-wooden-table-eIOPDU3Fkwk?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+- Icons are from FontAwesome CDN
