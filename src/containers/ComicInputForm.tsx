@@ -49,30 +49,6 @@ const ComicInputForm = forwardRef((props: any, ref): JSX.Element => {
           />
         </div>
       ))}
-      {/* <Button
-        onClick={addInputField}
-        variant="soft"
-        size="lg"
-        startDecorator={<i className="fas fa-plus"></i>}
-      >
-        Add
-      </Button>
-      <Button
-        onClick={() => props.onGenerateComics(inputFields)}
-        // variant="soft"
-        size="lg"
-        startDecorator={<i className="fas fa-hammer"></i>}
-      >
-        Generate
-      </Button>
-      <Button
-        onClick={props.onDownloadComic}
-        // variant="soft"
-        size="lg"
-        startDecorator={<i className="fas fa-download"></i>}
-      >
-        Download
-      </Button> */}
     </div>
   );
 });
