@@ -1,10 +1,27 @@
-import React, { ChangeEvent, useEffect, useState } from "react";
+import React, {
+  ChangeEvent,
+  forwardRef,
+  useEffect,
+  useImperativeHandle,
+  useState,
+} from "react";
+
 import ComicInput from "./ComicInput";
 
 import "./comic_input_form.css";
+import { Button, IconButton } from "@mui/joy";
 
-const ComicInputForm = (props: any): JSX.Element => {
+const ComicInputForm = forwardRef((props: any, ref): JSX.Element => {
   const [inputFields, setInputFields] = useState<Array<string>>([]);
+
+  useImperativeHandle(ref, () => ({
+    addInputField() {
+      addInputField();
+    },
+    generateComics() {
+      props.onGenerateComics(inputFields);
+    },
+  }));
 
   const addInputField = () => {
     if (inputFields.length === 10) {
@@ -33,13 +50,32 @@ const ComicInputForm = (props: any): JSX.Element => {
           />
         </div>
       ))}
-      <button onClick={addInputField}>Add</button>
-      <button onClick={() => props.onGenerateComics(inputFields)}>
+      {/* <Button
+        onClick={addInputField}
+        variant="soft"
+        size="lg"
+        startDecorator={<i className="fas fa-plus"></i>}
+      >
+        Add
+      </Button>
+      <Button
+        onClick={() => props.onGenerateComics(inputFields)}
+        // variant="soft"
+        size="lg"
+        startDecorator={<i className="fas fa-hammer"></i>}
+      >
         Generate
-      </button>
-      <button onClick={props.onDownloadComic}>Download</button>
+      </Button>
+      <Button
+        onClick={props.onDownloadComic}
+        // variant="soft"
+        size="lg"
+        startDecorator={<i className="fas fa-download"></i>}
+      >
+        Download
+      </Button> */}
     </div>
   );
-};
+});
 
 export default ComicInputForm;

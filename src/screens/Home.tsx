@@ -1,16 +1,19 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import ComicDisplayPanel from "../containers/ComicDisplayPanel";
 import ComicInputForm from "../containers/ComicInputForm";
 
 import "./home.css";
 import fetchComics from "../hooks/fetch_comics";
-import { Modal, Typography, ModalClose, Sheet } from "@mui/joy";
+import { Modal, Typography, ModalClose, Sheet, Button } from "@mui/joy";
 import html2canvas from "html2canvas";
 import downloadFile from "../hooks/download_file";
+import Header from "../containers/Header";
+import MediaQuery, { useMediaQuery } from "react-responsive";
 
 const Home = (props: any): JSX.Element => {
   const [comicStrips, setComicStrips] = useState<(Blob | null)[]>([]);
   const [modalOpen, setModalOpen] = useState<boolean>(false);
+  const inputFormRef = useRef();
 
   const generateComics = (inputFields: string[]) => {
     setComicStrips((oldValue: (Blob | null)[]): (Blob | null)[] => {
@@ -44,8 +47,48 @@ const Home = (props: any): JSX.Element => {
     downloadFile(canvas.toDataURL("image/png", 1.0));
   };
 
+  const isDesktopOrLaptop = useMediaQuery({
+    query: "(min-width: 1224px)",
+  });
+
   return (
     <section className="home">
+      <Header>
+        <Button
+          sx={{ m: "0rem 0.5rem" }}
+          onClick={() => downloadComic()}
+          size={isDesktopOrLaptop ? "lg" : "sm"}
+          startDecorator={
+            isDesktopOrLaptop ? <i className="fas fa-download"></i> : undefined
+          }
+        >
+          {isDesktopOrLaptop ? "Download" : ""}
+          {isDesktopOrLaptop ? "" : <i className="fas fa-download"></i>}
+        </Button>
+        <Button
+          sx={{ m: "0rem 0.5rem" }}
+          onClick={() => (inputFormRef.current as any)?.generateComics()}
+          size={isDesktopOrLaptop ? "lg" : "sm"}
+          startDecorator={
+            isDesktopOrLaptop ? <i className="fas fa-hammer"></i> : undefined
+          }
+        >
+          {isDesktopOrLaptop ? "Generate" : ""}
+          {isDesktopOrLaptop ? "" : <i className="fas fa-hammer"></i>}
+        </Button>
+        <Button
+          sx={{ m: "0rem 0.5rem" }}
+          onClick={() => (inputFormRef.current as any)?.addInputField()}
+          variant="soft"
+          size={isDesktopOrLaptop ? "lg" : "sm"}
+          startDecorator={
+            isDesktopOrLaptop ? <i className="fas fa-plus"></i> : undefined
+          }
+        >
+          {isDesktopOrLaptop ? "Add" : ""}
+          {isDesktopOrLaptop ? "" : <i className="fas fa-plus"></i>}
+        </Button>
+      </Header>
       <Modal
         aria-labelledby="modal-title"
         aria-describedby="modal-desc"
@@ -82,6 +125,7 @@ const Home = (props: any): JSX.Element => {
 
       <ComicDisplayPanel comicStrips={comicStrips}></ComicDisplayPanel>
       <ComicInputForm
+        ref={inputFormRef}
         onGenerateComics={generateComics}
         onDownloadComic={downloadComic}
         onInputOverflow={() => setModalOpen(true)}

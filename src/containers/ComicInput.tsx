@@ -13,7 +13,13 @@ const ComicInput = (props: any): JSX.Element => {
 
   return (
     <div className="comic-input">
-      <Textarea onChange={props.onChange} placeholder="Type in here…" />
+      <Textarea
+        style={{ backgroundColor: "#151515aa", color: "#ECE8F1" }}
+        size="lg"
+        variant="solid"
+        onChange={props.onChange}
+        placeholder="Ram entering Ayodhya..."
+      />
     </div>
   );
 };

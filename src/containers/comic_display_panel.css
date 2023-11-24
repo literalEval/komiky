@@ -1,5 +1,5 @@
 .comic-display-panel-inner {
-  background-color: #f8faf5;
+  background-color: #ECE8F1;
   width: 100%;
   display: grid;
   gap: 0.4em;
@@ -13,6 +13,6 @@
   .comic-display-panel-inner {
     grid-template-rows: auto;
     grid-template-columns: 1fr 1fr 1fr;
-    background-color: gray;
+    /* background-color: gray; */
   }
 }
