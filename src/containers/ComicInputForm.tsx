@@ -9,7 +9,6 @@ import React, {
 import ComicInput from "./ComicInput";
 
 import "./comic_input_form.css";
-import { Button, IconButton } from "@mui/joy";
 
 const ComicInputForm = forwardRef((props: any, ref): JSX.Element => {
   const [inputFields, setInputFields] = useState<Array<string>>([]);
@@ -24,7 +23,7 @@ const ComicInputForm = forwardRef((props: any, ref): JSX.Element => {
   }));
 
   const addInputField = () => {
-    if (inputFields.length === 10) {
+    if (inputFields.length === 8) {
       props.onInputOverflow();
       return;
     }

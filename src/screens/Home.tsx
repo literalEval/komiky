@@ -8,32 +8,39 @@ import { Modal, Typography, ModalClose, Sheet, Button } from "@mui/joy";
 import html2canvas from "html2canvas";
 import downloadFile from "../hooks/download_file";
 import Header from "../containers/Header";
-import MediaQuery, { useMediaQuery } from "react-responsive";
+import { useMediaQuery } from "react-responsive";
 
 const Home = (props: any): JSX.Element => {
   const [comicStrips, setComicStrips] = useState<(Blob | null)[]>([]);
   const [modalOpen, setModalOpen] = useState<boolean>(false);
+  const [modalInfoText, setModalInfoText] = useState<string[]>(["", ""]);
   const inputFormRef = useRef();
 
   const generateComics = (inputFields: string[]) => {
     setComicStrips((oldValue: (Blob | null)[]): (Blob | null)[] => {
-      if (inputFields.length > 10) {
+      if (inputFields.length > 8) {
         setModalOpen(true);
         return oldValue;
       }
-
-      console.log(comicStrips);
 
       const newComicStrips: (Blob | null)[] = [];
 
       inputFields.forEach((field, idx) => {
         newComicStrips.push(null);
-        // setComicStrips([...comicStrips]);
 
-        fetchComics({ inputs: field }).then((response) => {
-          comicStrips[idx] = response;
-          setComicStrips([...comicStrips]);
-        });
+        try {
+          fetchComics({ inputs: field }).then((response) => {
+            comicStrips[idx] = response;
+            setComicStrips([...comicStrips]);
+          });
+        } catch (e) {
+          setModalInfoText([
+            "Oops, an unexpected error occured",
+            `
+              There was some problem generating images. Please check your internet connection.
+          `,
+          ]);
+        }
       });
 
       return newComicStrips;
@@ -114,11 +121,10 @@ const Home = (props: any): JSX.Element => {
             fontWeight="lg"
             mb={1}
           >
-            Oops.. We are on budget
+            {modalInfoText[0]}
           </Typography>
           <Typography id="modal-desc" textColor="text.tertiary">
-            The image generation API takes some time to work. So, the current
-            count of images is capped at 10.
+            {modalInfoText[1]}
           </Typography>
         </Sheet>
       </Modal>
@@ -128,7 +134,16 @@ const Home = (props: any): JSX.Element => {
         ref={inputFormRef}
         onGenerateComics={generateComics}
         onDownloadComic={downloadComic}
-        onInputOverflow={() => setModalOpen(true)}
+        onInputOverflow={() => {
+          setModalInfoText([
+            "Oops, we are running on budget.",
+            `
+              The image generation API takes some time to work. So, the current
+              count of images is capped at 8.
+          `,
+          ]);
+          setModalOpen(true);
+        }}
       ></ComicInputForm>
     </section>
   );
