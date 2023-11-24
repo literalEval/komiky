@@ -1,6 +1,7 @@
 import { ChangeEvent, useState } from "react";
 
 import "./comic_input.css";
+import { Textarea } from "@mui/joy";
 
 const ComicInput = (props: any): JSX.Element => {
   // const [value, setValue] = useState<String>();
@@ -12,7 +13,7 @@ const ComicInput = (props: any): JSX.Element => {
 
   return (
     <div className="comic-input">
-      <textarea onChange={props.onChange}></textarea>
+      <Textarea onChange={props.onChange} placeholder="Type in here…" />
     </div>
   );
 };

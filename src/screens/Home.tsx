@@ -1,6 +1,6 @@
 import { useState } from "react";
-import ComicDisplayPanel from "../components/ComicDisplayPanel";
-import ComicInputForm from "../components/ComicInputForm";
+import ComicDisplayPanel from "../containers/ComicDisplayPanel";
+import ComicInputForm from "../containers/ComicInputForm";
 
 import "./home.css";
 import fetchComics from "../hooks/fetch_comics";
@@ -10,12 +10,12 @@ import downloadFile from "../hooks/download_file";
 
 const Home = (props: any): JSX.Element => {
   const [comicStrips, setComicStrips] = useState<(Blob | null)[]>([]);
-  const [open, setOpen] = useState<boolean>(false);
+  const [modalOpen, setModalOpen] = useState<boolean>(false);
 
   const generateComics = (inputFields: string[]) => {
     setComicStrips((oldValue: (Blob | null)[]): (Blob | null)[] => {
       if (inputFields.length > 10) {
-        setOpen(true);
+        setModalOpen(true);
         return oldValue;
       }
 
@@ -49,8 +49,8 @@ const Home = (props: any): JSX.Element => {
       <Modal
         aria-labelledby="modal-title"
         aria-describedby="modal-desc"
-        open={open}
-        onClose={() => setOpen(false)}
+        open={modalOpen}
+        onClose={() => setModalOpen(false)}
         sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
       >
         <Sheet
@@ -84,6 +84,7 @@ const Home = (props: any): JSX.Element => {
       <ComicInputForm
         onGenerateComics={generateComics}
         onDownloadComic={downloadComic}
+        onInputOverflow={() => setModalOpen(true)}
       ></ComicInputForm>
     </section>
   );

@@ -1,6 +1,7 @@
 import { CircularProgress } from "@mui/joy";
-import WowSuchEmpty from "../img/such_empty.svg";
 import "./comic_display_panel.css";
+
+import WowSuchEmpty from "../components/WowSuchEmpty";
 
 const ComicDisplayPanel = (props: any): JSX.Element => {
   return (
@@ -48,7 +49,7 @@ const ComicDisplayPanel = (props: any): JSX.Element => {
           })}
         </div>
       ) : (
-        <img alt="empty_info" src={WowSuchEmpty} width={"240rem"}></img>
+        <WowSuchEmpty></WowSuchEmpty>
       )}
     </div>
   );

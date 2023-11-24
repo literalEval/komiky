@@ -8,6 +8,7 @@ const ComicInputForm = (props: any): JSX.Element => {
 
   const addInputField = () => {
     if (inputFields.length === 10) {
+      props.onInputOverflow();
       return;
     }
 
